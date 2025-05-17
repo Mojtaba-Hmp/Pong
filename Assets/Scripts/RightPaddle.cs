@@ -9,12 +9,12 @@ public class RightPaddle : MonoBehaviour
     private float Min_Z = -4.6f;
     void Update()
     {
-        if (Input.GetKey(KeyCode.O) && gameObject.transform.position.z < Max_Z)
+        if (Input.GetKey(KeyCode.UpArrow) && gameObject.transform.position.z < Max_Z)
         {
             gameObject.transform.Translate(0, speed * Time.deltaTime,0);
         }
 
-        if (Input.GetKey(KeyCode.L) && gameObject.transform.position.z > Min_Z)
+        if (Input.GetKey(KeyCode.DownArrow) && gameObject.transform.position.z > Min_Z)
         {
             gameObject.transform.Translate(0, -speed * Time.deltaTime,0);
         }
