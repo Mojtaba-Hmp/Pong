@@ -7,41 +7,45 @@ using UnityEngine.SceneManagement;
 public class Score : MonoBehaviour
 {
     private Text scoreText;
-
     public static int rightPlayerScore;
     public static int leftPlayerScore;
-
     public GameObject leftPlayerPanelWon;
     public GameObject rightPlayerPanelWon;
-
+    private AudioSource audioSource;
+    public AudioClip winSound;
+    private bool soundPlayed = false;
     private int winScore = 3;
 
     void Start()
     {
+        scoreText = gameObject.GetComponent<Text>();
+        audioSource = GetComponent<AudioSource>();
         Time.timeScale = 1;
         leftPlayerScore = 0;
         rightPlayerScore = 0;
         leftPlayerPanelWon.SetActive(false);
         rightPlayerPanelWon.SetActive(false);
-        scoreText = gameObject.GetComponent<Text>();
     }
-
-   
     void Update()
     {
         scoreText.text = leftPlayerScore + " - " + rightPlayerScore;
 
-        if (leftPlayerScore == winScore)
+        if (leftPlayerScore == winScore && !soundPlayed)
         {
             leftPlayerPanelWon.SetActive(true);
             Time.timeScale = 0;
+            audioSource.PlayOneShot(winSound);
+            soundPlayed = true;
         }
 
-        if (rightPlayerScore == winScore)
+        if (rightPlayerScore == winScore && !soundPlayed)
         {
             rightPlayerPanelWon.SetActive(true);
             Time.timeScale = 0;
+            audioSource.PlayOneShot(winSound);
+            soundPlayed = true;
         }
+
     }
 
     public void Restart()
